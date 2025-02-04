@@ -30,6 +30,10 @@ public class BasePage {
         driver.get(url);
     }
 
+    protected String getBaseUrl() {
+        return "https://www.saucedemo.com/";
+    }
+
     protected WebElement waitForElementToBeVisible(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
