@@ -16,7 +16,7 @@ public class LoginPage extends BasePage {
     }
 
     public void visit() {
-        super.visit("https://www.saucedemo.com/");
+        super.visit(getBaseUrl());
     }
 
     public void enterUsername(String username) {

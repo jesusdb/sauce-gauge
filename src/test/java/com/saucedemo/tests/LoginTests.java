@@ -37,8 +37,8 @@ public class LoginTests {
         }
     }
 
-    @Step("Navigate to <saucedemoURL> and log in successfully")
-    public void testLoginFunctionality(String saucedemoURL) {
+    @Step("Login as standard user")
+    public void testLoginFunctionality() {
         logger.info("Starting testLoginFunctionality");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.visit();
@@ -50,8 +50,8 @@ public class LoginTests {
         assertThat(inventoryPage.getCurrentUrl()).isEqualTo("https://www.saucedemo.com/inventory.html");
     }
 
-    @Step("Navigate to <https://www.saucedemo.com/> and log in unsuccessfully")
-    public void testLoginFunctionalityWithInvalidCredentials(String saucedemoURL) {
+    @Step("Try to log in with invalid credentials and fail")
+    public void testLoginFunctionalityWithInvalidCredentials() {
         logger.info("Starting testLoginFunctionalityWithInvalidCredentials");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.visit();
