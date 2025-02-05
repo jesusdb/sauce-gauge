@@ -54,6 +54,17 @@ public class ProductsFilteringAndCartManagementTests {
         assertEachCriteriaFromTableIsSortedCorrectly(table, inventoryPage);
     }
 
+    @Step("Add products from the following list to cart: <table>")
+    public void testAddProductToCart(Table table) {
+        logger.info("Starting testAddProductToCart");
+        InventoryPage inventoryPage = logIn();
+
+        logger.info("Adding products from table to cart");
+        addProductsFromTableToCart(table, inventoryPage);
+
+        assertThat(inventoryPage.getShoppingCartBadgeCount()).isEqualTo(3);
+    }
+
     @AfterScenario
     public void tearDown() {
         driver.quit();
@@ -88,5 +99,19 @@ public class ProductsFilteringAndCartManagementTests {
                     break;
             }
         }
+    }
+
+    private void addProductsFromTableToCart(Table table, InventoryPage inventoryPage) {
+        for (TableRow row : table.getTableRows()) {
+            String productName = row.getCell("Product Name");
+            logger.info("Adding product " + productName + " to cart");
+            inventoryPage.addProductToCart(productName);
+        }
+    }
+
+    private InventoryPage logIn() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.visit();
+        return loginPage.logIn("standard_user", "secret_sauce");
     }
 }

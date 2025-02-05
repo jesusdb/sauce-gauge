@@ -1,10 +1,7 @@
 package com.saucedemo.pageobjects;
 
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.stream.Collectors;
-import java.util.Collections;
 
 import org.openqa.selenium.WebElement;
 
@@ -16,13 +13,6 @@ public class ListUtils {
     public static List<Float> getElementsPrice(List<WebElement> elements) {
         return elements.stream().map(e -> Float.parseFloat(e.getText().replace("$", ""))).collect(Collectors.toList());
     }
-
-    // public static boolean isSorted(List<String> elements) {
-    //     List<String> sortedElements = new ArrayList<>(elements);
-    //     Collections.sort(sortedElements);
-
-    //     return elements.equals(sortedElements);
-    // }
 
     public static <T extends Comparable<? super T>> boolean isSorted(List<T> list) {
         if (list == null || list.size() <= 1) {
@@ -48,13 +38,5 @@ public class ListUtils {
         }
         return true;
     }
-
-    // public static boolean isReverseSorted(List<String> elements) {
-    //     List<String> sortedElements = new ArrayList<>(elements);
-    //     Collections.sort(sortedElements);
-    //     Collections.sort(sortedElements, Collections.reverseOrder());
-
-    //     return elements.equals(sortedElements);
-    // }
 }
 
