@@ -15,6 +15,9 @@ public class InventoryPage extends BasePage {
     private By inventoryItemsLocator = By.className("inventory_item");
     private By inventoryItemNamesLocator = By.className("inventory_item_name");
     private By inventoryItemPricesLocator = By.className("inventory_item_price");
+    private By addToCartButtonLocator = By.className("btn_inventory");
+    private By shoppingCartButtonLocator = By.className("shopping_cart_link");
+    private By shoppingCartBadgeLocator = By.className("shopping_cart_badge");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -60,5 +63,28 @@ public class InventoryPage extends BasePage {
 
     public List<WebElement> getInventoryItemPrices() {
         return driver.findElements(inventoryItemPricesLocator);
+    }
+
+    public WebElement findProductByName(String productName) {
+        return driver.findElement(By.xpath("//div[text()='" + productName + "']/ancestor::div[@class='inventory_item']"));
+    }
+
+    public void addProductToCart(String productName) {
+        WebElement product = findProductByName(productName);
+        WebElement addToCartButton = product.findElement(addToCartButtonLocator);
+        addToCartButton.click();
+    }
+
+    public void clickShoppingCartButton() {
+        WebElement shoppingCartButton = driver.findElement(shoppingCartButtonLocator);
+        shoppingCartButton.click();
+    }
+
+    public WebElement getShoppingCartBadge() {
+        return driver.findElement(shoppingCartBadgeLocator);
+    }
+
+    public int getShoppingCartBadgeCount() {
+        return Integer.parseInt(getShoppingCartBadge().getText());
     }
 }
